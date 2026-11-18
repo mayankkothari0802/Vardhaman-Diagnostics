@@ -2,100 +2,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#123d38">
-  <title>Vardhaman Diagnostics</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7f6;
-      color: #18332f;
-    }
-    header {
-      background: #123d38;
-      color: white;
-      padding: 24px 18px;
-      text-align: center;
-    }
-    header h1 { margin: 0; font-size: 25px; }
-    header p { color: #d3e5df; }
-    main {
-      max-width: 600px;
-      margin: 24px auto;
-      padding: 0 16px;
-    }
-    .card {
-      background: white;
-      padding: 22px;
-      border-radius: 14px;
-      margin-bottom: 18px;
-      box-shadow: 0 3px 12px #0000000c;
-    }
-    h2 { color: #123d38; }
-    .service {
-      background: #e8f2ef;
-      padding: 15px;
-      border-radius: 10px;
-      margin: 12px 0;
-    }
-    button {
-      background: #16765e;
-      color: white;
-      border: 0;
-      border-radius: 9px;
-      padding: 14px;
-      width: 100%;
-      font-size: 16px;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #66736d;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123d38">
+<title>Vardhaman Diagnostics</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f3f7f5;color:#19352f}
+header{background:#123d38;color:white;padding:24px 18px}
+header h1{margin:0;font-size:25px}
+header p{color:#d6e8df}
+main{max-width:650px;margin:auto;padding:16px}
+.card{background:white;padding:18px;border-radius:14px;margin-bottom:16px}
+h2{color:#123d38}
+input,select{width:100%;padding:13px;margin:7px 0 12px;border:1px solid #ccd8d2;border-radius:8px;font-size:15px}
+.test{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:14px 0;border-bottom:1px solid #e5ebe8}
+.test button{width:auto;padding:9px 13px}
+button{background:#16765e;color:white;border:0;border-radius:8px;padding:13px;font-size:15px;font-weight:bold;cursor:pointer}
+.price{font-weight:bold;color:#16765e;white-space:nowrap}
+.small{color:#687a72;font-size:13px}
+.total{font-size:21px;font-weight:bold;color:#16765e}
+.full{width:100%}
+footer{text-align:center;padding:20px;color:#687a72}
+</style>
 </head>
 <body>
 
 <header>
-  <h1>Vardhaman Diagnostics</h1>
-  <p>Your Health, Our Priority</p>
+<h1>Vardhaman Diagnostics</h1>
+<p>Your Health, Our Priority</p>
+<p>🏠 Home Sample Collection Available</p>
 </header>
 
 <main>
-  <section class="card">
-    <h2>Welcome!</h2>
-    <p>Book your blood tests from the comfort of your home.</p>
-    <p>Easy booking • Home sample collection</p>
-  </section>
 
-  <section class="card">
-    <h2>Our Services</h2>
-    <div class="service">
-      <strong>🩸 Blood Tests</strong>
-      <p>Explore available tests and their prices.</p>
-    </div>
-    <div class="service">
-      <strong>🏠 Home Collection</strong>
-      <p>Book a convenient home sample collection slot.</p>
-    </div>
-  </section>
+<section class="card">
+<h2>Welcome!</h2>
+<p>Book your blood tests from the comfort of your home.</p>
+<p>Choose your tests, check prices and request home collection.</p>
+</section>
 
-  <section class="card">
-    <h2>Need a Booking?</h2>
-    <p>Contact our team on WhatsApp.</p>
-    <button onclick="window.open('https://wa.me/917021653862?text=Hello%20Vardhaman%20Diagnostics%2C%20I%20want%20to%20book%20a%20home%20collection.', '_blank')">
-      Book on WhatsApp
-    </button>
-  </section>
+<section class="card">
+<h2>🩸 Blood Test Catalogue</h2>
+<p class="small">Select tests to add them to your booking.</p>
+<input id="search" placeholder="Search blood tests..." oninput="showTests()">
+<div id="testList"></div>
+</section>
+
+<section class="card">
+<h2>🛒 Your Selected Tests</h2>
+<div id="selected">No tests selected yet.</div>
+<p class="total" id="total">Total: ₹0</p>
+</section>
+
+<section class="card">
+<h2>🏠 Home Collection Booking</h2>
+
+<form id="bookingForm">
+<label>Patient Name</label>
+<input id="name" required placeholder="Enter patient name">
+
+<label>Mobile Number</label>
+<input id="phone" type="tel" required pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number">
+
+<label>Full Home Address</label>
+<input id="address" required placeholder="Enter complete address">
+
+<label>Preferred Collection Date</label>
+<input id="date" type="date" required>
+
+<label>Preferred Time</label>
+<select id="time" required>
+<option value="">Select preferred time</option>
+<option>7 AM - 9 AM</option>
+<option>9 AM - 11 AM</option>
+<option>11 AM - 1 PM</option>
+</select>
+
+<button class="full" type="submit">Send Booking on WhatsApp</button>
+</form>
+<p class="small">Your booking request will be sent to our WhatsApp for confirmation. Your slot is not confirmed until our team responds.</p>
+</section>
+
 </main>
 
 <footer>
-  © 2026 Vardhaman Diagnostics
+© 2026 Vardhaman Diagnostics
 </footer>
 
+<script>
+
+// EDIT TEST NAMES AND PRICES HERE
+const tests = [
+{name:"CBC",price:150},
+{name:"Blood Sugar (Fasting)",price:60},
+{name:"HbA1c",price:350},
+{name:"Thyroid Profile (T3,T4,TSH)",price:250},
+{name:"Lipid Profile",price:250},
+{name:"Liver Function Test",price:400},
+{name:"Kidney Function Test",price:450},
+{name:"Vitamin D",price:700},
+{name:"Vitamin B12",price:550},
+{name:"Complete Urine Examination",price:100},
+{name:"Uric Acid",price:150},
+{name:"ESR",price:150},
+{name:"Hemoglobin",price:100},
+{name:"Calcium",price:200},
+{name:"CRP",price:250}
+];
+
+let selected = [];
+
+function showTests(){
+const search = document.getElementById("search").value.toLowerCase();
+const list = document.getElementById("testList");
+
+list.innerHTML = "";
+
+tests.filter(t=>t.name.toLowerCase().includes(search))
+.forEach(t=>{
+const div=document.createElement("div");
+div.className="test";
+
+const name=document.createElement("strong");
+name.textContent=t.name;
+
+const price=document.createElement("span");
+price.className="price";
+price.textContent="₹"+t.price;
+
+const btn=document.createElement("button");
+btn.textContent=selected.some(x=>x.name===t.name)?"Added":"Add +";
+btn.disabled=selected.some(x=>x.name===t.name);
+btn.onclick=()=>addTest(t);
+
+div.append(name,price,btn);
+list.appendChild(div);
+});
+}
+
+function addTest(test){
+if(!selected.some(x=>x.name===test.name)){
+selected.push(test);
+}
+showTests();
+showSelected();
+}
+
+function removeTest(name){
+selected=selected.filter(t=>t.name!==name);
+showTests();
+showSelected();
+}
+
+function showSelected(){
+const area=document.getElementById("selected");
+area.innerHTML="";
+
+if(selected.length===0){
+area.textContent="No tests selected yet.";
+}
+
+selected.forEach(t=>{
+const div=document.createElement("div");
+div.className="test";
+
+const name=document.createElement("span");
+name.textContent=t.name+" - ₹"+t.price;
+
+const btn=document.createElement("button");
+btn.textContent="Remove";
+btn.onclick=()=>removeTest(t.name);
+
+div.append(name,btn);
+area.appendChild(div);
+});
+
+const total=selected.reduce((sum,t)=>sum+t.price,0);
+document.getElementById("total").textContent="Total: ₹"+total;
+}
+
+document.getElementById("date").min=
+new Date().toLocaleDateString("en-CA");
+
+document.getElementById("bookingForm").addEventListener("submit",function(e){
+e.preventDefault();
+
+if(selected.length===0){
+alert("Please select at least one blood test.");
+return;
+}
+
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const address=document.getElementById("address").value.trim();
+const date=document.getElementById("date").value;
+const time=document.getElementById("time").value;
+
+const total=selected.reduce((sum,t)=>sum+t.price,0);
+
+const message=
+"NEW HOME COLLECTION BOOKING\n\n"+
+"Centre: Vardhaman Diagnostics\n"+
+"Patient: "+name+"\n"+
+"Mobile: "+phone+"\n"+
+"Address: "+address+"\n"+
+"Date: "+date+"\n"+
+"Time: "+time+"\n\n"+
+"Selected Tests:\n"+
+selected.map(t=>t.name+" - Rs."+t.price).join("\n")+
+"\n\nTotal: Rs."+total+
+"\n\nPlease confirm this booking.";
+
+const url="https://wa.me/917021653862?text="+
+encodeURIComponent(message);
+
+window.open(url,"_blank");
+});
+
+showTests();
+showSelected();
+
+</script>
 </body>
 </html>
+
