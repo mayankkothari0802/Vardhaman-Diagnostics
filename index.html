@@ -47,7 +47,16 @@ footer{text-align:center;padding:20px;color:#687a72}
 <p class="small">Select tests to add them to your booking.</p>
 <input id="search" placeholder="Search blood tests..." oninput="showTests()">
 <div id="testList"></div>
-</section>
+  <select id="category" onchange="showTests()">
+<option value="All">All Tests</option>
+<option value="Blood">Complete Blood Tests</option>
+<option value="Diabetes">Diabetes Tests</option>
+<option value="Thyroid">Thyroid Tests</option>
+<option value="Liver & Kidney">Liver & Kidney Tests</option>
+<option value="Vitamins">Vitamin Tests</option>
+<option value="Lipid">Lipid Profile</option>
+<option value="Other">Other Tests</option>
+</select>
 
 <section class="card">
 <h2>🛒 Your Selected Tests</h2>
@@ -94,32 +103,37 @@ footer{text-align:center;padding:20px;color:#687a72}
 
 // EDIT TEST NAMES AND PRICES HERE
 const tests = [
-{name:"CBC",price:150},
-{name:"Blood Sugar (Fasting)",price:60},
-{name:"HbA1c",price:350},
-{name:"Thyroid Profile (T3,T4,TSH)",price:250},
-{name:"Lipid Profile",price:250},
-{name:"Liver Function Test",price:400},
-{name:"Kidney Function Test",price:450},
-{name:"Vitamin D",price:700},
-{name:"Vitamin B12",price:550},
-{name:"Complete Urine Examination",price:100},
-{name:"Uric Acid",price:150},
-{name:"ESR",price:150},
-{name:"Hemoglobin",price:100},
-{name:"Calcium",price:200},
-{name:"CRP",price:250}
+{name:"CBC",price:150,category:"Blood"},
+{name:"Blood Sugar (Fasting)",price:60,category:"Diabetes"},
+{name:"HbA1c",price:350,category:"Diabetes"},
+{name:"Thyroid Profile (T3,T4,TSH)",price:250,category:"Thyroid"},
+{name:"Lipid Profile",price:250,category:"Lipid"},
+{name:"Liver Function Test",price:400,category:"Liver & Kidney"},
+{name:"Kidney Function Test",price:450,category:"Liver & Kidney"},
+{name:"Vitamin D",price:700,category:"Vitamins"},
+{name:"Vitamin B12",price:550,category:"Vitamins"},
+{name:"Complete Urine Examination",price:100,category:"Other"},
+{name:"Uric Acid",price:150,category:"Other"},
+{name:"ESR",price:150,category:"Blood"},
+{name:"Hemoglobin",price:100,category:"Blood"},
+{name:"Calcium",price:200,category:"Other"},
+{name:"CRP",price:250,category:"Other"}
 ];
+
 
 let selected = [];
 
 function showTests(){
 const search = document.getElementById("search").value.toLowerCase();
+const category = document.getElementById("category").value;
 const list = document.getElementById("testList");
 
 list.innerHTML = "";
 
-tests.filter(t=>t.name.toLowerCase().includes(search))
+tests.filter(t=>
+(t.name.toLowerCase().includes(search)) &&
+(category==="All" || t.category===category)
+)
 .forEach(t=>{
 const div=document.createElement("div");
 div.className="test";
