@@ -24,6 +24,17 @@ button{background:#16765e;color:white;border:0;border-radius:8px;padding:13px;fo
 .total{font-size:21px;font-weight:bold;color:#16765e}
 .full{width:100%}
 footer{text-align:center;padding:20px;color:#687a72}
+  .call-button {
+  display: block;
+  text-align: center;
+  background: #198754;
+  color: white;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  }
 </style>
 </head>
 <body>
@@ -229,6 +240,9 @@ selected.map(t=>t.name+" - Rs."+t.price).join("\n")+
 "\n\nPlease confirm this booking.";
 
 const url="https://wa.me/917021653862?text="+
+  <a href="tel:+917021653862" class="call-button">
+  Call Vardhaman Diagnostics
+</a>
 encodeURIComponent(message);
 
 window.open(url,"_blank");
